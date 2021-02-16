@@ -123,6 +123,10 @@ switch(chx)
 	break;
 	case 4:
 		reponse = rechercherAuteur(&B);
+		if(!reponse)
+		{
+			printf("impossible de trouver d'oeuvre(s) concernant cet auteur");
+		}
 	break;
 	case 5:
 		reponse= supprimerPos(&B);
@@ -134,6 +138,29 @@ switch(chx)
 		{
 			printf("livre non supprimé erreur");
 		}
+	break;
+	case 6 :
+		reponse = emprunter(&B);
+		if(reponse==1)
+		{
+			printf("vous avez 30 jours pour le ramener");
+		}
+		else if(reponse ==0)
+		{
+			printf("je n'ai pas trouvé le livre que vous chercher il est peut être déja emprunté");
+		}
+	break;
+	case 7 :
+		reponse=restituer(&B);
+		if(reponse)
+		{
+			printf("merci d'avoir ramener ce livre bisou");
+		}
+		else
+		{
+			printf("impossible de trouver ce livre sur mon registre, il appartient peut être a une autre biblio");
+		}
+		
 	break;
 	case 8 :
 		triTitre(&B);

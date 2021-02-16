@@ -95,6 +95,56 @@ int supprimerPos(T_Bibliotheque * ptrB)
 	
 }
 
+int emprunter(T_Bibliotheque *ptrB)
+{
+	int i=0;
+	T_Code code;
+	
+	lireChaine("quel livre voulez vous emprunter ? (code)",code,K_MaxCode);
+
+	while(i<ptrB->nbLivres && strcmp(code, ptrB->etagere[i].code) != 0)
+	{
+		i++;
+	}
+	if (i == ptrB->nbLivres)//si le livre n'existe pas dans la bibilio
+	{
+		return 0;
+	}
+	else if(strcmp(ptrB->etagere[i].emprunteur,"NE")!=0)//si le livre est déja emprunté
+	{
+		return 0;
+	}
+	else
+	{
+		afficherLivre(&ptrB->etagere[i]);
+		lireChaine("votre nom svp??",ptrB->etagere[i].emprunteur,K_MaxEmp);
+		return 1;
+	}
+}
+
+int restituer(T_Bibliotheque *ptrB)
+{
+	int i = 0;
+	T_Code code='\0';
+
+	lireChaine("quel livre voulez vous rendre ? (code)",code,K_MaxCode);
+
+    while (i < (ptrB->nbLivres) && strcmp(code, ptrB->etagere[i].code) != 0) //ptrB->nbLivres == &ptrB.nbLivres
+    {
+        i++;
+    }
+    if (i == ptrB->nbLivres || strcmp(ptrB->etagere[i].emprunteur,"NE")) //si le livre n'existe pas ou n'est as emprunté
+    {
+        return 0;
+    }
+    else 
+    {
+        afficherLivre(&ptrB->etagere[i]);
+		strcpy(ptrB->etagere[i].emprunteur,"NE");
+    }
+    return 1;
+}
+
 void triTitre(T_Bibliotheque* ptrB)
 {
 	int i,j;
