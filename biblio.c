@@ -82,15 +82,72 @@ int supprimerPos(T_Bibliotheque * ptrB)
 	printf("position ? :   ");
 	scanf("%d",&pos);
 
-	if(pos>=ptrB->nbLivres)
+	if(pos-1>=ptrB->nbLivres)
 	{
 		return 0;
 	}
-	for(i=pos;i<ptrB->nbLivres;i++)
+	for(i=pos-1;i<ptrB->nbLivres;i++)
 	{
 		ptrB->etagere[i]=ptrB->etagere[i+1];
 	}
 	ptrB->nbLivres--;
 	return 1;
 	
+}
+
+void triTitre(T_Bibliotheque* ptrB)
+{
+	int i,j;
+	T_livre swap;
+
+	for(i=1;i<ptrB->nbLivres;i++)
+	{
+		for(j=0;j<ptrB->nbLivres-1;j++)
+		{
+			if(strcmp(ptrB->etagere[j].titre,ptrB->etagere[j+1].titre)>0)
+			{
+				swap = ptrB->etagere[j];
+				ptrB->etagere[j]=ptrB->etagere[j+1];
+				ptrB->etagere[j+1]=swap;
+			}
+		}
+	}
+}
+
+void triAuteur(T_Bibliotheque* ptrB)
+{
+	int i,j;
+	T_livre swap;
+
+	for(i=1;i<ptrB->nbLivres;i++)
+	{
+		for(j=0;j<ptrB->nbLivres-1;j++)
+		{
+			if(strcmp(ptrB->etagere[j].auteur,ptrB->etagere[j+1].auteur)>0)
+			{
+				swap = ptrB->etagere[j];
+				ptrB->etagere[j]=ptrB->etagere[j+1];
+				ptrB->etagere[j+1]=swap;
+			}
+		}
+	}
+}
+
+void triAnnee(T_Bibliotheque* ptrB)
+{
+	int i,j;
+	T_livre swap;
+
+	for(i=1;i<ptrB->nbLivres;i++)
+	{
+		for(j=0;j<ptrB->nbLivres-1;j++)
+		{
+			if(ptrB->etagere[j].annee > ptrB->etagere[j+1].annee)
+			{
+				swap = ptrB->etagere[j];
+				ptrB->etagere[j]=ptrB->etagere[j+1];
+				ptrB->etagere[j+1]=swap;
+			}
+		}
+	}
 }

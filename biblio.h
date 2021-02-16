@@ -25,5 +25,8 @@ int  afficherBibliotheque(const T_Bibliotheque  *ptrB);
 int rechercherTitre(const T_Bibliotheque *ptrB);
 int rechercherAuteur(const T_Bibliotheque *ptrB);
 int supprimerPos(T_Bibliotheque * ptrB);
+void triTitre(T_Bibliotheque* ptrB);
+void triAuteur(T_Bibliotheque* ptrB);
+void triAnnee(T_Bibliotheque* ptrB);
 
 #endif
