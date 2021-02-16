@@ -75,56 +75,22 @@ int rechercherAuteur(const T_Bibliotheque *ptrB)
 	return cpt;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-/*
-	j'ai voulu procéder par dichotomie mais je me suis rendu compte que les livres n'etait pas forcément trier je laisse donc ceci en commentaire
-
-	
-	titlePos=rechercheDicho(ptrB,ptrB->nbLivres,title,0);
-
-	if(titlePos>=0)
-	{
-		afficherLivre(&(ptrB->etagere[titlePos]));
-		return 1;
-	}
-	return titlePos;
-
-int rechercheDicho(const T_Bibliotheque *ptrB, int taille, const T_Titre valeur,int debut)
+int supprimerPos(T_Bibliotheque * ptrB)
 {
-    int milieu=(taille+debut)/2;//milieu du tableau ou on travail
-    //if(milieu%2!=0); milieu-=0.5;//si le tabeleau est de taille impaire le milieu prend la valeur inférieur la 
-                                //plus proche du milieu réel plus besoin de le faire car milieu est un int
-    if(strcmp((ptrB->etagere[milieu].titre),valeur) == 0)
-    {
-		printf("%d",milieu);
-        return milieu; //si on trouve la valeurs
-    }
-    else if(taille<debut) //si le tableau ne contient pas notre valeur
-    {
-		printf("eeee");
-        return -1;
-    }
-    else if(strcmp((ptrB->etagere[milieu].titre),valeur) < 0)
-    {
-		printf("fff");
-        rechercheDicho(ptrB,milieu,valeur,debut); //on recherche dans la partie inférieur du tableau restant
-    }
-    else
-    {
-		printf("ggg");
-        rechercheDicho(ptrB,taille,valeur,milieu+1);//on recherche dans la partie sup du tableau
-    }
-	return -1;
-}
+	int i,pos=0;
 
-*/
+	printf("position ? :   ");
+	scanf("%d",&pos);
+
+	if(pos>=ptrB->nbLivres)
+	{
+		return 0;
+	}
+	for(i=pos;i<ptrB->nbLivres;i++)
+	{
+		ptrB->etagere[i]=ptrB->etagere[i+1];
+	}
+	ptrB->nbLivres--;
+	return 1;
+	
+}

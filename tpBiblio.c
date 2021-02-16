@@ -10,7 +10,7 @@ printf("\n 2 - afficher tous les livres de la bibliotheque ");
 printf("\n 3 - rechercher un livre (par son titre)");  // il peut y avoir plusieurs livres de même titre. Dans ce cas, indiquez le nombre d'exemplaires disponibles
 printf("\n 4 - rechercher et afficher tous les livres d'un auteur");
 printf("\n 5 - supprimer un livre de la bibliotheque");
-// si les 5 choix ci dessus sont bien codés, modifiez votre structure T_Livre et passez à 5 champs (avec cote,editeur et annee)
+// si les 5 choix ci dessus sont bien codés, modifiez votre structure T_Livre et passez à 5 champs (avec code,editeur et annee)
 
 
 // au programme du TP7 :
@@ -72,7 +72,20 @@ switch(chx)
 	case 4:
 		reponse = rechercherAuteur(&B);
 	break;
+	case 5:
+		reponse= supprimerPos(&B);
+		if(reponse)
+		{
+			printf("supression réussie");
+		}
+		else
+		{
+			printf("livre non supprimé erreur");
+		}
+		
+	break;
 	}
+
 
 }while(chx!=0);
 
