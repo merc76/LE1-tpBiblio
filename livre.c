@@ -15,3 +15,5 @@ afficherChaine("AUTEUR :", (ptrL->auteur ));
 printf("\n");
 }
 
+printf("prout");
+aedfg
