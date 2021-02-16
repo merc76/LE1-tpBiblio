@@ -52,8 +52,3 @@ void afficherChaine(const char *nomChamp, const char *valeur)
 printf("%s %s",nomChamp,valeur);
 
 }
-/*
-
-cacaccacac
-
-*/

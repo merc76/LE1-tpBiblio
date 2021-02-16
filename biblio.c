@@ -59,7 +59,7 @@ int rechercherTitre(const T_Bibliotheque *ptrB)
 int rechercherAuteur(const T_Bibliotheque *ptrB)
 {
 	T_Aut author;
-	int i,cpt;
+	int i,cpt=0;
 
 	lireChaine("auteur ?",author,K_MaxAut);
 
@@ -68,7 +68,7 @@ int rechercherAuteur(const T_Bibliotheque *ptrB)
 		if(strcmp(ptrB->etagere[i].auteur,author) == 0)
 		{
 			afficherLivre(&(ptrB->etagere[i]));
-			printf("   position : %d \n",i);
+			printf("position : %d \n",i);
 			cpt++;
 		}
 	}

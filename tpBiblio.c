@@ -15,8 +15,9 @@ printf("\n 5 - supprimer un livre de la bibliotheque");
 
 // au programme du TP7 :
 // ajouter le champ emprunteur à votre structure T_Livre
-/*
+
 printf("\n 6 - emprunter un livre de la bibliotheque");
+/*
 printf("\n 7 - restituer/rendre un livre de la bibliotheque");
 printf("\n 8 - trier les livres (par titre)");
 printf("\n 9 - trier les livres (par auteur)");
