@@ -125,15 +125,15 @@ int emprunter(T_Bibliotheque *ptrB)
 int restituer(T_Bibliotheque *ptrB)
 {
 	int i = 0;
-	T_Code code='\0';
+	T_Code code="";
 
 	lireChaine("quel livre voulez vous rendre ? (code)",code,K_MaxCode);
 
-    while (i < (ptrB->nbLivres) && strcmp(code, ptrB->etagere[i].code) != 0) //ptrB->nbLivres == &ptrB.nbLivres
+    while(i < (ptrB->nbLivres) && strcmp(code, ptrB->etagere[i].code) != 0) //ptrB->nbLivres == &ptrB.nbLivres
     {
         i++;
     }
-    if (i == ptrB->nbLivres || strcmp(ptrB->etagere[i].emprunteur,"NE")) //si le livre n'existe pas ou n'est as emprunté
+    if(i == ptrB->nbLivres || !strcmp(ptrB->etagere[i].emprunteur,"NE")) //si le livre n'existe pas ou n'est as emprunté
     {
         return 0;
     }
@@ -154,7 +154,7 @@ void triTitre(T_Bibliotheque* ptrB)
 	{
 		for(j=0;j<ptrB->nbLivres-1;j++)
 		{
-			if(strcmp(ptrB->etagere[j].titre,ptrB->etagere[j+1].titre)>0)
+			if(strcasecmp(ptrB->etagere[j].titre,ptrB->etagere[j+1].titre)>0)
 			{
 				swap = ptrB->etagere[j];
 				ptrB->etagere[j]=ptrB->etagere[j+1];
@@ -173,7 +173,7 @@ void triAuteur(T_Bibliotheque* ptrB)
 	{
 		for(j=0;j<ptrB->nbLivres-1;j++)
 		{
-			if(strcmp(ptrB->etagere[j].auteur,ptrB->etagere[j+1].auteur)>0)
+			if(strcasecmp(ptrB->etagere[j].auteur,ptrB->etagere[j+1].auteur)>0)
 			{
 				swap = ptrB->etagere[j];
 				ptrB->etagere[j]=ptrB->etagere[j+1];

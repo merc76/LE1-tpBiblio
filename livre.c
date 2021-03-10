@@ -14,7 +14,7 @@ strcpy(ptrL->emprunteur,"NE");//on sdéclare le livre non emprunté quand on l'e
 
 void afficherLivre(const T_livre *ptrL)
 {
-afficherChaine("CODE :",ptrL->code);
+afficherChaine("",ptrL->code);
 printf(" - ");
 afficherChaine("TITRE :", (ptrL->titre));
 printf(" - ");
@@ -22,8 +22,8 @@ afficherChaine("AUTEUR :", (ptrL->auteur ));
 printf(" - ");
 afficherChaine("EDITEUR :",ptrL->editeur);
 printf(" - ");
-printf("ANNEE %d :",ptrL->annee);
+printf("ANNEE : %d",ptrL->annee);
 printf(" - ");
-afficherChaine("EMPRUNTEUR :",(ptrL->emprunteur));
+afficherChaine("",(ptrL->emprunteur));
 printf("\n");
 }

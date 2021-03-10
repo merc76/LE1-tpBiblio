@@ -45,8 +45,10 @@ if (fic!=NULL)
 	ptrB->nbLivres=i-1;
 	puts("CHARGEMENT  REUSSI ..............");
 }
-else puts("ECHEC DE CHARGEMENT  !!!!!  ");
-
+else 
+{
+	puts("ECHEC DE CHARGEMENT  !!!!!  ");
+}
 }
 
 
@@ -90,7 +92,6 @@ return choix;
 
 int main()
 {
-lectureFichierTXT();
 int reponse,chx;
 T_Bibliotheque B; 
 init(&B);
@@ -195,9 +196,9 @@ char c;
 fic=fopen("fic.txt","rt"); // r = le mode read   w = mode write (avec ecrasement)
 //fopen renvoie NULL si probleme (fichier effac� , disque non accessible ...
 if (fic!=NULL)
-	{
+{
 	do
-		{
+	{
 		//fgets(chaine,M,fic);   //fputs pour �crire dans un fichier txt
 		//fscanf(fic,"%s",chaine); //fprintf pour �crire dans un fichier txt
 	//	fscanf(fic,"%s %s",chaine,chaine2);
@@ -206,10 +207,14 @@ if (fic!=NULL)
 	//	if (!feof(fic))
            //printf("\n\t >%s--%s<",chaine,chaine2);
         printf(">%c<",c);
-		}
-    while(!feof(fic));
-	fclose(fic);
-	puts("\nLECTURE REUSSIE ..............");
 	}
-	else puts("ECHEC DE LECTURE DU FICHIER TXT !!!!!  ");
+    while(!feof(fic));
+	puts("\nLECTURE REUSSIE ..............");
+	fclose(fic);
+}
+else
+{
+	puts("ECHEC DE LECTURE DU FICHIER TXT !!!!!  ");
+}
+
 }
