@@ -97,8 +97,8 @@ int supprimerPos(T_Bibliotheque * ptrB)
 
 int emprunter(T_Bibliotheque *ptrB)
 {
-	int i=0;
 	T_Code code;
+	int i=0;
 	
 	lireChaine("quel livre voulez vous emprunter ? (code)",code,K_MaxCode);
 
@@ -110,14 +110,18 @@ int emprunter(T_Bibliotheque *ptrB)
 	{
 		return 0;
 	}
-	else if(!strcmp(ptrB->etagere[i].emprunteur.nomemprunteur,"Non emprunte"))//si le livre est déja emprunté
+	else if(strcmp(ptrB->etagere[i].emprunteur.nomemprunteur,"Non emprunte"))//si le livre est déja emprunté
 	{
-		return 0;
+		return 2;
 	}
 	else
 	{
 		afficherLivre(&ptrB->etagere[i]);
-		lireChaine("votre nom svp??",ptrB->etagere[i].emprunteur.nomemprunteur,K_MaxEmp);
+		saisirEmprunteur(&ptrB->etagere[i]);
+
+
+		afficherEmp(&ptrB->etagere[i]);
+
 		return 1;
 	}
 }
@@ -213,11 +217,93 @@ int  afficherLivredispo(const T_Bibliotheque  *ptrB)
     {
         for(i=0;i<ptrB->nbLivres;i++)
         {
-            if(ptrB->etagere[i].emprunteur.nomemprunteur[0] == '\0' || strcmp(ptrB->etagere[i].emprunteur.nomemprunteur,"Non emprunte"))
+            if(ptrB->etagere[i].emprunteur.nomemprunteur[0] == '\0' || !strcmp(ptrB->etagere[i].emprunteur.nomemprunteur,"Non emprunte"))
             { 
                 afficherLivre( &(ptrB->etagere[i]));
             }
     	}
         return 1;
     }
+}
+
+int afficherRetard(const T_Bibliotheque  *ptrB)
+{
+	int i=0;
+	int nbLivreRetard=0;
+	long int delay=0;//compte le nb de jours d'emprunt d'un livre
+	time_t t = time(NULL);
+	struct tm tm = *localtime(&t);//current time
+
+	for(i=0; i<ptrB->nbLivres; i++)
+	{
+		if(strcmp(ptrB->etagere[i].emprunteur.nomemprunteur,"Non emprunte"))//si le livre est bel et bien en cours d'emprunt
+		{
+			//ici on utilisera une méthode particulière, on compte le nombre de jour depuis le 1 janvier 0000 pour aujourdh'ui et pour le jour
+			//de l'emprunt puis on les soustrait. Ainsi on obtient le nombre de jours depuis lequel le livre cible
+			//a été emprunté.
+			delay=(tm.tm_yday+1 + ((tm.tm_year+1900)*365)) - (((ptrB->etagere[i].emprunteur.lannee) *365) + (convertDMtoDY(ptrB->etagere[i].emprunteur.ledate,ptrB->etagere[i].emprunteur.lemois)));
+			if(delay > 7)
+			{
+				afficherLivre(&ptrB->etagere[i]);
+				afficherEmp(&ptrB->etagere[i]);
+				printf("\nen retard de %ld jour(s)",delay-7);//on rajoute le nombre de jours de retard
+				nbLivreRetard++;
+			}
+		}
+	}
+	return nbLivreRetard;
+}
+
+/***********************************************************************************************************************************/
+// fonction qui convertie une date au format JJ/MM en nombre de jours prend le nombre de jour et de mois en entrées en renvoie
+// le nombre de jours écoulé depuis le 1er janvier de l'année.
+// (ne marche que sur un an et ne prend pas en compte les années bisexctiles)
+/***********************************************************************************************************************************/
+int convertDMtoDY(const int numD,const int numM)
+{
+	int days=0;
+	int i=0;
+
+	for(i=0; i<12; i++)
+	{
+		switch (i)
+		{
+			case 1://fevrier
+				days += 28;//on ajoute le nombre de jours que contient le mois 
+			break;
+			case 2://mars
+				days += 31;
+			break;
+			case 3://avril
+				days += 30;
+			break;
+			case 4:
+				days += 31;
+			break;
+			case 5:
+				days += 30;
+			break;
+			case 6:
+				days += 31;
+			break;
+			case 7:
+				days += 31;
+			break;
+			case 8:
+				days += 30;
+			break;
+			case 9:
+				days += 31;
+			break;
+			case 10:
+				days += 30;
+			break;
+		}
+		if(numM == i)//si on arrive au mois de l'emprunt
+		{
+			return (days+numD);//on ajoute le nombre de jour passé depuis le debut dumois en cours
+		}
+	}
+	return  0;//si il ya un bug mais ne devrait pas arriver
+	
 }

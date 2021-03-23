@@ -31,5 +31,7 @@ void triTitre(T_Bibliotheque* ptrB);
 void triAuteur(T_Bibliotheque* ptrB);
 void triAnnee(T_Bibliotheque* ptrB);
 int afficherLivredispo(const T_Bibliotheque *ptrB);
+int afficherRetard(const T_Bibliotheque  *ptrB);
+int convertDMtoDY(const int numD,const int numM);
 
 #endif

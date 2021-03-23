@@ -58,8 +58,7 @@ void lireEntier(const char *nomChamp,int *a)
     printf("%s ",nomChamp);
     scanf("%d",a); //Si en entrée T_annee ptr a pas de & car a est déjà une adresse
 }
-void afficherEntier(const char*nomChamp, int val)
+void afficherEntier(const char *nomChamp, int val)
 {
     printf("%s %d ",nomChamp,val);
-
 }

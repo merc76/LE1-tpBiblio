@@ -76,8 +76,8 @@ printf("\n 10 - trier les livres (par annee)");
 
 // si les 5 choix (6-10) sont bien codés, changez le type T_Emp et remplacez-le par la structure T_Emp visible dans livre.h
 // vous pourrez alors faire les menus 11,12,etc...
-// printf("\n 11- lister les livres disponibles "); 
-// printf("\n 12 - lister les emprunts en retard "); //on suppose qu'un emprunt dure 7 jours.
+printf("\n 11- lister les livres disponibles "); 
+printf("\n 12 - lister les emprunts en retard "); //on suppose qu'un emprunt dure 7 jours.
 // printf("\n 13 - ... imaginez vous même vos propres fonctionnalités ")
 
 printf("\n 0 - QUITTER");
@@ -144,12 +144,17 @@ switch(chx)
 		reponse = emprunter(&B);
 		if(reponse==1)
 		{
-			printf("vous avez 30 jours pour le ramener");
+			printf("vous avez 7 jours pour le ramener");
 		}
 		else if(reponse ==0)
 		{
-			printf("je n'ai pas trouvé le livre que vous chercher il est peut être déja emprunté");
+			printf("je n'ai pas trouvé le livre que vous chercher ");
 		}
+		else if(reponse == 2)
+		{
+			printf("le livre que vous cherchez est emprunté");
+		}
+		
 	break;
 	case 7 :
 		reponse=restituer(&B);
@@ -175,6 +180,17 @@ switch(chx)
 	case 11 :
 		afficherLivredispo(&B);
 	break;
+	case 12 :
+		reponse= afficherRetard(&B);
+		if(reponse == 0)
+		{
+			printf("aucun livre en retard");
+		}
+		else
+		{
+			printf("trouvé %d emprunt(s) en retard",reponse);
+		}
+	break;
 
 	}
 	
@@ -188,10 +204,10 @@ return 0;
 
 void lectureFichierTXT()
 {
-int M=100;
+//int M=100;
 FILE *fic=NULL; //le type FILE
-char chaine[M];
-char chaine2[M];
+//char chaine[M];
+//har chaine2[M];
 char c;
 fic=fopen("fic.txt","rt"); // r = le mode read   w = mode write (avec ecrasement)
 //fopen renvoie NULL si probleme (fichier effac� , disque non accessible ...
