@@ -110,14 +110,14 @@ int emprunter(T_Bibliotheque *ptrB)
 	{
 		return 0;
 	}
-	else if(strcmp(ptrB->etagere[i].emprunteur,"NE")!=0)//si le livre est déja emprunté
+	else if(!strcmp(ptrB->etagere[i].emprunteur.nomemprunteur,"Non emprunte"))//si le livre est déja emprunté
 	{
 		return 0;
 	}
 	else
 	{
 		afficherLivre(&ptrB->etagere[i]);
-		lireChaine("votre nom svp??",ptrB->etagere[i].emprunteur,K_MaxEmp);
+		lireChaine("votre nom svp??",ptrB->etagere[i].emprunteur.nomemprunteur,K_MaxEmp);
 		return 1;
 	}
 }
@@ -133,14 +133,14 @@ int restituer(T_Bibliotheque *ptrB)
     {
         i++;
     }
-    if(i == ptrB->nbLivres || !strcmp(ptrB->etagere[i].emprunteur,"NE")) //si le livre n'existe pas ou n'est as emprunté
+    if(i == ptrB->nbLivres || !strcmp(ptrB->etagere[i].emprunteur.nomemprunteur,"Non emprunte")) //si le livre n'existe pas ou n'est as emprunté
     {
         return 0;
     }
     else 
     {
         afficherLivre(&ptrB->etagere[i]);
-		strcpy(ptrB->etagere[i].emprunteur,"NE");
+		strcpy(ptrB->etagere[i].emprunteur.nomemprunteur,"Non emprunte");
     }
     return 1;
 }
@@ -200,4 +200,24 @@ void triAnnee(T_Bibliotheque* ptrB)
 			}
 		}
 	}
+}
+
+int  afficherLivredispo(const T_Bibliotheque  *ptrB)
+{
+	int i;
+	if(ptrB->nbLivres==0)
+	{
+	    return 0;
+	}
+	else
+    {
+        for(i=0;i<ptrB->nbLivres;i++)
+        {
+            if(ptrB->etagere[i].emprunteur.nomemprunteur[0] == '\0' || strcmp(ptrB->etagere[i].emprunteur.nomemprunteur,"Non emprunte"))
+            { 
+                afficherLivre( &(ptrB->etagere[i]));
+            }
+    	}
+        return 1;
+    }
 }

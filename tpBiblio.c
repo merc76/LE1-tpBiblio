@@ -165,15 +165,15 @@ switch(chx)
 	break;
 	case 8 :
 		triTitre(&B);
-		afficherBibliotheque(&B);
 	break;
 	case 9 :
 		triAuteur(&B);
-		afficherBibliotheque(&B);
 	break;
 	case 10 :
 		triAnnee(&B);
-		afficherBibliotheque(&B);
+	break;
+	case 11 :
+		afficherLivredispo(&B);
 	break;
 
 	}

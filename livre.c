@@ -5,25 +5,34 @@ void saisirLivre(T_livre * ptrL)
 {
 lireChaine("TITRE :", (ptrL->titre), MAX_TITRE );
 lireChaine("AUTEUR :", (ptrL->auteur ), MAX);
+lireChaine("CODE :", (ptrL->code ), MAX_CODE);
 lireChaine("EDITEUR :", (ptrL->editeur ), MAX);
-lireChaine("CODE :",(ptrL->code), K_MaxCode);
-printf("ANNEE :");
-scanf("%d",&(ptrL->annee));
-strcpy(ptrL->emprunteur,"NE");//on sdéclare le livre non emprunté quand on l'enregistre
+lireEntier("ANNEE  :",&(ptrL->annee));
+strcpy(ptrL->emprunteur.nomemprunteur,"Non emprunte");
 }
 
 void afficherLivre(const T_livre *ptrL)
 {
-afficherChaine("",ptrL->code);
-printf(" - ");
 afficherChaine("TITRE :", (ptrL->titre));
-printf(" - ");
-afficherChaine("AUTEUR :", (ptrL->auteur ));
-printf(" - ");
-afficherChaine("EDITEUR :",ptrL->editeur);
-printf(" - ");
-printf("ANNEE : %d",ptrL->annee);
-printf(" - ");
-afficherChaine("",(ptrL->emprunteur));
 printf("\n");
+afficherChaine("AUTEUR :", (ptrL->auteur ));
+printf("\n");
+afficherChaine("CODE :",ptrL->code);
+printf("\n");
+afficherChaine("EDITEUR :", (ptrL->editeur));
+printf("\n");
+afficherEntier("ANNEE :",(ptrL->annee));
+printf("\n");
+if(! strcmp(ptrL->emprunteur.nomemprunteur,"Non emprunte"))
+{
+    afficherChaine("EMPRUNT :","En cours d'emprunt");//ici car on ne veut pas forcément donner le nom de l'emprunteur a tous les clients
 }
+else
+{
+    afficherChaine("EMPRUNT :","Disponible");
+}
+
+printf("\n\n");
+
+}
+

@@ -23,7 +23,7 @@ do
 		}
  }
 while(car!='\n' && i<nbMAXcaracAsaisir);
-// le caractere \n est rangé dans lachaine !!
+// le caractere \n est rangé dans la chaine !!
 lachaine[i]='\0';
 
 if (i==nbMAXcaracAsaisir) 
@@ -50,5 +50,16 @@ return chaine;
 void afficherChaine(const char *nomChamp, const char *valeur)
 {
 printf("%s %s",nomChamp,valeur);
+
+}
+
+void lireEntier(const char *nomChamp,int *a)
+{
+    printf("%s ",nomChamp);
+    scanf("%d",a); //Si en entrée T_annee ptr a pas de & car a est déjà une adresse
+}
+void afficherEntier(const char*nomChamp, int val)
+{
+    printf("%s %d ",nomChamp,val);
 
 }
